@@ -1,0 +1,7 @@
+{
+  "name": "raffle-udv",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

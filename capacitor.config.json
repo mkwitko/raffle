@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "raffle-udv",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
