@@ -1,0 +1,31 @@
+div {
+    height: 100%;
+    ion-item {
+        --background: rgba(255, 255, 255, 0.8);
+        --border-radius: 5%;
+        ion-label {
+            font-size: 2.3vh;
+            margin: 0;
+        }
+        ion-input {
+            --color: #000;
+            font-size: 3vh;
+        }
+    }
+}
+
+.logo {
+    height: 35vh;
+    width: auto;
+}
+
+ion-slides {
+    min-height: 60vh;
+    ion-slide {
+        min-height: 100%;
+    }
+}
+
+ion-button {
+    font-size: 2vh;
+}

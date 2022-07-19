@@ -1,0 +1,33 @@
+ion-content {
+    --background: linear-gradient(90deg, var(--ion-color-primary-shade) 0%, var(--ion-color-primary-tint) 70%) !important;
+}
+
+ion-menu {
+    ion-content {
+        --ion-background-color: linear-gradient(90deg, var(--ion-color-primary-shade) 0%, var(--ion-color-primary-tint) 70%) !important;
+        --ion-text-color: white;
+    }
+}
+
+ion-avatar {
+    height: 11vh;
+    width: 11vh;
+    display: block;
+    margin: auto;
+    margin-top: 4vh;
+    border: white 1.5px solid;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.nome {
+    font-size: 2vh;
+}
+
+.active {
+    color: var(--ion-color-primary);
+}
+
+ion-label {
+    font-weight: 800;
+}

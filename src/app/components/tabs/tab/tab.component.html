@@ -1,0 +1,12 @@
+<ion-footer>
+    <ion-toolbar color="primary">
+        <div class="flex">
+            <ng-container *ngFor="let item of tabs">
+                <ion-button mode="ios" expand="block" (click)="goTo(item.path)">
+                    <ion-icon [ngClass]="item.active === true ? 'active' : 'non-active'" name="{{item.icon}}"></ion-icon>
+                    <!-- <ion-label class="ion-text-center" [ngClass]="item.active === true ? 'active' : 'non-active'">{{item.name}}</ion-label> -->
+                </ion-button>
+            </ng-container>
+        </div>
+    </ion-toolbar>
+</ion-footer>

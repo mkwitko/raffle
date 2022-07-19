@@ -1,3 +1,6 @@
+import { global } from './global';
+
 export const environment = {
-  production: true
+  production: true,
+  global: global,
 };

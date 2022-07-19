@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-toolbar mode="ios" color="primary">
+
+        <ng-container *ngIf="url">
+            <ion-buttons slot="start">
+                <ion-back-button text="" defaultHref="{{url}}"></ion-back-button>
+            </ion-buttons>
+        </ng-container>
+
+        <ng-container *ngIf="menu && !url">
+            <ion-buttons slot="start">
+                <ion-menu-button autoHide class="menu-button" color="light"></ion-menu-button>
+            </ion-buttons>
+        </ng-container>
+        <ion-buttons *ngIf="!login" slot="end">
+            <ion-button *ngIf="modal" (click)="close()">
+                <ion-icon slot="icon-only" name="close-sharp"></ion-icon>
+            </ion-button>
+            <!-- <ion-button class="not-button" *ngIf="!modal" (click)="notification()">
+                <ng-container>
+                    <ion-badge color="warning" mode="md">
+                        <ion-label>0</ion-label>
+                    </ion-badge>
+                </ng-container>
+                <ion-icon slot="icon-only" name="notifications-sharp">
+                </ion-icon>
+            </ion-button> -->
+        </ion-buttons>
+        <ion-title *ngIf="title">
+            {{title}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>

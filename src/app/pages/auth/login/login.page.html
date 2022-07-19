@@ -1,0 +1,62 @@
+<app-header [login]="true" [menu]="false"></app-header>
+
+<ion-content class="swiper-no-swiping">
+    <div class="container">
+        <p class="ion-text-center ion-margin-top">
+            <img src="../../../../assets/img/logo.png" alt="" class="ion-padding logo">
+        </p>
+
+        <ion-slides mode="ios" pager="ios" scrollbar="ios">
+            <ion-slide>
+                <div class="ion-padding">
+                    <ion-item class="ion-margin-top">
+                        <ion-label position="floating">E-mail</ion-label>
+                        <ion-input [(ngModel)]="userLogin.userEmail" type="email"></ion-input>
+                    </ion-item>
+                    <ion-item class="ion-margin-top">
+                        <ion-label position="floating">Senha</ion-label>
+                        <ion-input [(ngModel)]="userLogin.password" type="password"></ion-input>
+                    </ion-item>
+                    <ion-button (click)="login()" class="ion-margin-top" color="primary" expand="block">
+                        Login
+                    </ion-button>
+                    <ion-button (click)="changeSlide('next')" expand="block" color="light">
+                        Cadastrar
+                    </ion-button>
+                    <!-- <ion-button (click)="loginGuest()" expand="block" fill="clear">
+                        Entrar como convidado
+                    </ion-button> -->
+                    <ion-button (click)="goTo('forgot')" size="small" expand="block" fill="clear" shape="round">
+                        Esqueci minha senha
+                    </ion-button>
+                </div>
+            </ion-slide>
+            <ion-slide>
+                <div class="ion-padding">
+                    <ion-item class="ion-margin-top">
+                        <ion-label position="floating">Nome</ion-label>
+                        <ion-input [(ngModel)]="userRegister.userName" type="text"></ion-input>
+                    </ion-item>
+                    <ion-item class="ion-margin-top">
+                        <ion-label position="floating">E-mail</ion-label>
+                        <ion-input [(ngModel)]="userRegister.userEmail" type="email"></ion-input>
+                    </ion-item>
+                    <ion-item class="ion-margin-top">
+                        <ion-label position="floating">Senha</ion-label>
+                        <ion-input [(ngModel)]="userRegister.password" type="password"></ion-input>
+                    </ion-item>
+                    <ion-item class="ion-margin-top">
+                        <ion-label position="floating">Confirme sua Senha</ion-label>
+                        <ion-input [(ngModel)]="confirmPassword" type="password"></ion-input>
+                    </ion-item>
+                    <ion-button (click)="register()" class="ion-margin-top" color="primary" expand="block">
+                        Cadastrar
+                    </ion-button>
+                    <ion-button (click)="changeSlide('prev')" expand="block" color="light">
+                        Voltar
+                    </ion-button>
+                </div>
+            </ion-slide>
+        </ion-slides>
+    </div>
+</ion-content>

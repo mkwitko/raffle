@@ -1,0 +1,15 @@
+<ion-card>
+    <ion-card-header>
+        <ion-card-subtitle>
+            <img [src]="info.img" alt="">
+        </ion-card-subtitle>
+        <ion-card-title class="ion-text-center">{{info.title}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+        {{info.description}}
+
+        <ion-button class="ion-margin-top" (click)="goToCampaing(info)" expand="block">
+            Quero Saber mais!
+        </ion-button>
+    </ion-card-content>
+</ion-card>

@@ -1,0 +1,16 @@
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    .raffle {
+        height: 6vh;
+        width: 6vh;
+        .reserved {
+            color: var(--ion-color-secondary);
+        }
+    }
+}
+
+ion-accordion {
+    background: whitesmoke;
+}

@@ -1,0 +1,19 @@
+ion-card {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    ion-card-title {
+        font-size: 2.5vh;
+        font-weight: 700;
+    }
+    ion-card-content {
+        font-size: 2vh;
+    }
+    img {
+        min-height: 35vh;
+        max-height: 35vh;
+        width: 100%;
+        margin: 0 auto;
+        display: block;
+    }
+}

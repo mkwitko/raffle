@@ -1,0 +1,23 @@
+ion-label {
+  font-weight: 600;
+  font-size: 1.5vh;
+  padding-left: 0.2vh;
+}
+
+.active {
+  color: var(--ion-color-secondary);
+}
+
+.non-active {
+  color: white;
+}
+
+ion-icon {
+  font-size: 3vh;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

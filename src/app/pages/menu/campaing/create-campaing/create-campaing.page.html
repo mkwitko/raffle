@@ -1,0 +1,55 @@
+<app-header></app-header>
+
+<ion-content>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col size="12">
+
+                <p class="ion-text-center">
+                    <img src="../../../../assets/img/logo.png" alt="" class="logo">
+                </p>
+                <ion-list>
+                    <ion-item lines="none">
+                        <input #file hidden class="color" accept="image/*" type="file" (change)="choose($event)">
+                        <ion-button (click)="file.click()" expand="block" fill="clear">
+                            Adicionar Foto
+                        </ion-button>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label position="floating">Titulo</ion-label>
+                        <ion-input [(ngModel)]="campaing.title" type="text" placeholder="Adicione o Titulo da Campanha Aqui!"></ion-input>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label position="floating">Subtitulo</ion-label>
+                        <ion-input [(ngModel)]="campaing.subtitle" type="text" placeholder="Adicione o Subtitulo da Campanha Aqui!"></ion-input>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label position="floating">Descrição</ion-label>
+                        <ion-textarea [(ngModel)]="campaing.description" type="text" placeholder="Adicione a descrição da Campanha Aqui!"></ion-textarea>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label position="floating">Premiação</ion-label>
+                        <ion-input [(ngModel)]="campaing.prize" type="text" placeholder="Adicione a Premiação da Campanha Aqui!"></ion-input>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label position="floating">Quantidade de Tickets</ion-label>
+                        <ion-input [(ngModel)]="campaing.tickets" type="text" placeholder="Adicione a Quantidade de Rifas da Campanha Aqui!"></ion-input>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-label position="floating">Valor a ser Arrecadado</ion-label>
+                        <ion-input [(ngModel)]="campaing.value" type="text" placeholder="Adicione Valor Total a ser arrecadado Aqui!"></ion-input>
+                    </ion-item>
+                </ion-list>
+                <ion-button (click)="submit()" expand="block">
+                    Salvar
+                </ion-button>
+
+                <ion-button (click)="back()" color="light" expand="block">
+                    <ion-label color="primary">Cancelar</ion-label>
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>

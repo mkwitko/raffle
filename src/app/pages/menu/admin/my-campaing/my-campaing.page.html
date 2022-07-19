@@ -1,0 +1,44 @@
+<app-header></app-header>
+
+<ion-content>
+    <ion-grid fixed>
+        <ion-row>
+            <ion-col size="12">
+                <ion-card>
+                    <ion-accordion-group value="active" mode="ios" class="ion-padding">
+                        <ion-accordion mode="ios" value="active">
+                            <ion-item slot="header" color="primary">
+                                <ion-label>Campanhas Ativas</ion-label>
+                            </ion-item>
+                            <div class="ion-padding" slot="content">
+                                <ion-list>
+                                    <ng-container *ngFor="let item of campaingClass.getAdminCampaings(true)">
+                                        <ion-card (click)="goTo(item.id)">
+                                            <ion-card-header>
+                                                <ion-card-subtitle *ngIf="item.subtitle">{{item.subtitle}}</ion-card-subtitle>
+                                                <ion-card-title *ngIf="item.title">{{item.title}}</ion-card-title>
+                                            </ion-card-header>
+                                            <ion-card-content *ngIf="item.description">
+                                                {{item.description}}
+                                            </ion-card-content>
+                                        </ion-card>
+                                    </ng-container>
+                                </ion-list>
+                            </div>
+                        </ion-accordion>
+
+                        <ion-accordion value="inactive">
+                            <ion-item slot="header" color="light">
+                                <ion-label>Campanhas Passadas</ion-label>
+                            </ion-item>
+                            <div class="ion-padding" slot="content">
+
+                            </div>
+                        </ion-accordion>
+                    </ion-accordion-group>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>
