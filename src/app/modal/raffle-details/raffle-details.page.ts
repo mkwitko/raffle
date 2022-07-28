@@ -31,8 +31,7 @@ export class RaffleDetailsPage {
   ) {}
 
   sharing() {
-    // this.downloadTerm();
-    navigator.share({ title: 'Example Page', url: 'https://example.com' });
+    this.downloadTerm();
   }
 
   dataURLtoFile(dataurl, filename) {
