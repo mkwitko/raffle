@@ -44,6 +44,8 @@ import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { Capacitor } from '@capacitor/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
+import { DatePipe } from '@angular/common';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -81,12 +83,12 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     }),
 
     AppRoutingModule,
-     ServiceWorkerModule.register('ngsw-worker.js', {
-       enabled: environment.production,
-       // Register the ServiceWorker as soon as the application is stable
-       // or after 30 seconds (whichever comes first).
-       registrationStrategy: 'registerWhenStable:30000'
-     }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
@@ -95,6 +97,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     AwesomeCordovaNativePlugin,
     //Social Sharing
     SocialSharing,
+
+    DatePipe,
   ],
   bootstrap: [AppComponent],
 })

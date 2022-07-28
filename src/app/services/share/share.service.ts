@@ -1,3 +1,4 @@
+import { ScreenService } from './../screen/screen.service';
 import { Injectable } from '@angular/core';
 import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 import { Platform } from '@ionic/angular';
@@ -8,13 +9,17 @@ import { Platform } from '@ionic/angular';
 export class ShareService {
   constructor(
     private socialSharing: SocialSharing,
-    private platform: Platform
+    private platform: Platform,
+    private screen: ScreenService
   ) {}
 
-  share(message, subject) {
+  share(file) {
+    console.log('share');
     if (this.platform.is('cordova')) {
-      this.socialSharing.share(message, subject);
+      this.screen.presentToast('mobile');
+      this.socialSharing.share('', '', file);
     } else {
+      this.screen.presentToast('web');
       // navigator
       //   .share({
       //     title: subject,

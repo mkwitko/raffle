@@ -62,7 +62,7 @@ export class SolicitationsPage implements OnInit {
     for (const a of this.solicitation.get()) {
       if (a.id === id) {
         a.ticketsInitial = Number(value);
-        a.ticketsFinal = Number(value) + 9;
+        a.ticketsFinal = Number(value) + 99;
       }
     }
   }
@@ -71,7 +71,7 @@ export class SolicitationsPage implements OnInit {
     let value = event.detail.value;
     for (const a of this.solicitation.get()) {
       if (a.id === id) {
-        a.ticketsInitial = Number(value) - 9;
+        a.ticketsInitial = Number(value) - 99;
         a.ticketsFinal = Number(value);
       }
     }

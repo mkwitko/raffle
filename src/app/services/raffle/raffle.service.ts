@@ -18,10 +18,12 @@ export class RaffleService {
     private share: ShareService
   ) {}
 
-  sell(raffle, campaing, name, fromSell) {
+  sell(raffle, campaing, data, fromSell) {
     const newRaffle: Raffle = {
       number: raffle.number,
-      buyer: name,
+      buyer: data.name,
+      contact: data.contact,
+      seller: data.seller,
       purchasedWhen: new Date().getTime(),
       value: raffle.value,
       reserved: false,
@@ -79,10 +81,6 @@ export class RaffleService {
         this.campaignClass.getMyTickets(campaing);
         this.campaignClass.createPagination(campaing);
         this.screen.dismissModal();
-        this.share.share(
-          'Número reservado com sucesso para ' + name + ' até o dia ' + till,
-          'Reserva'
-        );
       });
     });
   }
