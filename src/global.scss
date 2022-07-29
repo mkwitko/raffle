@@ -337,11 +337,11 @@ button.toast-close-button {
     --backdrop-opacity: 0.2;
     --background: linear-gradient(90deg, var(--ion-color-primary-shade) 0%, var(--ion-color-primary-tint) 70%) !important;
     .alert-wrapper {
-        border: 1px solid whitesmoke;
+        border: 1px solid white;
     }
     .alert-title {
-        font-size: 2vh;
-        color: whitesmoke;
+        font-size: 2.5vh;
+        color: white;
     }
     .alert-input {
         height: 3.5vh;
@@ -349,6 +349,6 @@ button.toast-close-button {
     }
     .alert-button {
         font-size: 2vh;
-        color: whitesmoke;
+        color: white;
     }
 }

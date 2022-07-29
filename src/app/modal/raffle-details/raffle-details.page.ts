@@ -136,20 +136,25 @@ export class RaffleDetailsPage {
         {
           name: 'name',
           placeholder: 'Comprador',
+          value: this.who.buyer,
         },
         {
           name: 'contact',
-          placeholder: 'Contato',
+          placeholder: 'Whatsapp',
+          value: this.who.contact,
         },
         {
           name: 'seller',
-          placeholder: 'Vendedor',
+          placeholder: 'Sócio Vendedor',
+          value: this.who.seller,
         },
       ],
     });
 
     await alert.present();
   }
+
+  edit() {}
 
   async presentAlertReserve() {
     const alert = await this.alertController.create({
@@ -192,62 +197,53 @@ export class RaffleDetailsPage {
   async downloadTerm() {
     const content = [
       {
-        text: '\n\n\nComprovante de Compra de Rifa',
-        style: 'header',
+        text: '\n\nAção entre Amigos',
+        fontSize: 16,
         alignment: 'center',
         bold: true,
       },
       {
+        text: 'Centro Espírita Beneficiente União do Vegetal\nNúcleo Jardim das Flores - 9ª região',
+        fontSize: 10,
+        alignment: 'center',
+        bold: false,
+      },
+      {
         text: [
-          '\n\n\n\n\n\n Por meio deste fica comprovado a compra do número, ',
-          // eslint-disable-next-line max-len
           {
-            text: this.who.number,
+            text: '\n\n Comprovante de Compra\n Nº ' + this.who.number,
+            fontSize: 14,
             bold: true,
             color: 'black',
+            alignment: 'center',
           },
-          ', pelo sr ou sra ',
+          '\n\n Por meio deste fica registrada a compra de \n',
           { text: this.who.buyer, bold: true, color: 'black' },
-          ', e vendido por ',
-          {
-            text: this.who.seller,
-            bold: true,
-            color: 'black',
-          },
-          ' na data de ',
-          {
-            text: this.datePip(this.who.purchasedWhen),
-            bold: true,
-            color: 'black',
-          },
-          ', tendo sido o contato do comprador registrado como ',
+          ' - ',
           {
             text: this.who.contact,
+            fontSize: 10,
             bold: true,
             color: 'black',
           },
-          '. \n\n\nSolicitamos que seja revisado pelo comprador e vendedor se as informações deste comprovante estão corretas, sendo estas a forma como a organização tem de garantir que o vencedor da rifa receba seu prêmio.',
+          ' - em \n',
+          {
+            text: this.datePip(this.who.purchasedWhen),
+            fontSize: 10,
+            bold: true,
+            color: 'black',
+          },
+          '. Verifique se as informações de\n cadastro estão corretas, sendo estas a forma\n como a organização tem de garantir que o\n vencedor receba seu prêmio.',
         ],
-        style: 'content',
+        fontSize: 10,
         bold: false,
-        alignment: 'justify',
+        alignment: 'center',
       },
     ];
     const styles = {
-      header: {
-        fontSize: 14,
-      },
-      content: {
-        fontSize: 10,
-      },
+      pageSize: 'A6',
     };
-    this.pdf.createDocPDF(
-      true,
-      'Comprovante Rifa JDF',
-      'green',
-      content,
-      styles
-    );
+    this.pdf.createDocPDF(true, 'Comprovante', 'green', content, styles);
     this.screen.presentToast('Comprovante gerado com sucesso.', '', 'success');
   }
 }

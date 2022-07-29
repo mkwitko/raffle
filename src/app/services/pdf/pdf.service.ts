@@ -46,6 +46,23 @@ export class PdfService {
         opacity: 0.1,
         bold: true,
       },
+      pageSize: 'A6',
+      permissions: {
+        printing: 'highResolution', //'lowResolution'
+        modifying: false,
+        copying: false,
+        annotating: false,
+        fillingForms: false,
+        contentAccessibility: false,
+        documentAssembly: false,
+      },
+      info: {
+        title: 'Ação entre amigos JDF',
+        author: 'Jardim das Flores',
+        subject:
+          'Este documento foi gerado oficialmente pelo sistema de ação entre amigos desenvolvido pelo JDF',
+        keywords: 'JDF Jardim das Flores WebAPP',
+      },
       content: [content],
       styles: [styles],
     };

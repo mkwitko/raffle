@@ -86,12 +86,15 @@
 
 <ion-footer>
     <ion-toolbar>
-        <ion-button *ngIf="!who.sold" color="primary" (click)="presentAlertSell(who.reserved ? true : false)" expand="block">
+        <ion-button *ngIf="!who.sold" color="primary" (click)="presentAlertSell(true)" expand="block">
             Vender
         </ion-button>
         <!-- <ion-button *ngIf="!who.reserved && !who.sold" color="secondary" (click)="presentAlertReserve()" expand="block">
             Reservar
         </ion-button> -->
+        <ion-button *ngIf="who.sold" (click)="presentAlertSell(false)" expand="block" color="primary">
+            Editar Informações
+        </ion-button>
         <ion-button *ngIf="who.sold || who.reserved" color="tertiary" (click)="presentAlertLiberate(who.sold ? true : false)" expand="block">
             Liberar Número
         </ion-button>

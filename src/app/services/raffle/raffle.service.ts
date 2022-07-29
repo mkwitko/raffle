@@ -34,15 +34,13 @@ export class RaffleService {
     let raffles = campaing.raffles;
     raffles[this.findRaffleIndex(raffle, campaing)] = newRaffle;
     campaing.raffles = raffles;
-    campaing.sold++;
     if (fromSell) {
-      campaing.reserved--;
-    } else {
+      campaing.sold++;
       campaing.free--;
     }
     this.campaignClass.update(campaing).then(() => {
       this.screen.presentToast(
-        'Número vendido com sucesso para ' + name,
+        'Número vendido com sucesso para ' + data.name,
         'Venda Confirmada!',
         'sucess'
       );
