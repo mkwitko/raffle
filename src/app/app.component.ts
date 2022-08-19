@@ -21,6 +21,13 @@ export class AppComponent {
       disabled: 'false',
       role: 'all',
     },
+    {
+      nome: 'Sócios Vendedores',
+      icone: 'easel-sharp',
+      url: 'sellers-home',
+      disabled: 'false',
+      role: 'all',
+    },
     // {
     //   nome: 'Explorar',
     //   icone: 'home-sharp',

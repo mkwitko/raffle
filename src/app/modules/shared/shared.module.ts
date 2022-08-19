@@ -1,3 +1,4 @@
+import { RaffleClass } from './../../classes/raffle/raffle';
 import { GroupClass } from './../../classes/group/group';
 import { CampaingClass } from './../../classes/campaing/campaing';
 import { NgModule } from '@angular/core';
@@ -8,6 +9,6 @@ import { Solicitation } from 'src/app/classes/solicitation/solicitation';
 @NgModule({
   declarations: [],
   imports: [CommonModule],
-  providers: [UserClass, CampaingClass, GroupClass, Solicitation],
+  providers: [UserClass, CampaingClass, GroupClass, Solicitation, RaffleClass],
 })
 export class SharedModule {}

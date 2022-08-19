@@ -28,11 +28,11 @@ export class CampaingClass {
   private interfaceRef: Campaing;
 
   constructor(
+    public user: UserClass,
     private crud: CrudService,
     private screen: ScreenService,
     private translate: TranslateService,
-    private cache: CacheService,
-    private user: UserClass
+    private cache: CacheService
   ) {
     this.collection = this.crud.collectionConstructor(this.ref);
   }

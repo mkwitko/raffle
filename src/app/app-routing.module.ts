@@ -125,6 +125,10 @@ const routes: Routes = [
       ).then((m) => m.SolicitationsPageModule),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'sellers-home',
+    loadChildren: () => import('./pages/menu/sellers/sellers-home/sellers-home.module').then( m => m.SellersHomePageModule)
+  },
 ];
 
 @NgModule({

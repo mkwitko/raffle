@@ -197,7 +197,14 @@ export class RaffleDetailsPage {
   async downloadTerm() {
     const content = [
       {
-        text: '\n\nAção entre Amigos',
+        image: await this.getBase64ImageFromURL(
+          '../../../assets/img/promo.jpeg'
+        ),
+        width: 100,
+        alignment: 'center',
+      },
+      {
+        text: '\nAção entre Amigos',
         fontSize: 16,
         alignment: 'center',
         bold: true,
@@ -211,7 +218,7 @@ export class RaffleDetailsPage {
       {
         text: [
           {
-            text: '\n\n Comprovante de Compra\n Nº ' + this.who.number,
+            text: '\nComprovante de Compra\n Nº ' + this.who.number,
             fontSize: 14,
             bold: true,
             color: 'black',
@@ -233,7 +240,12 @@ export class RaffleDetailsPage {
             bold: true,
             color: 'black',
           },
-          '. Verifique se as informações de\n cadastro estão corretas, sendo estas a forma\n como a organização tem de garantir que o\n vencedor receba seu prêmio.',
+          '. Verifique se as informações de\n cadastro estão corretas, sendo estas a forma\n como a organização tem de garantir que o\n vencedor receba seu prêmio.\n\n O sorteio será realizado e filmado, com testemunhas presentes, no dia 17/12/2022. \n\nConfira as regras desta ação ',
+          {
+            text: 'clicando aqui.',
+            link: 'https://bit.ly/RegrasAcaoJDF',
+            decoration: 'underline',
+          },
         ],
         fontSize: 10,
         bold: false,
@@ -245,5 +257,31 @@ export class RaffleDetailsPage {
     };
     this.pdf.createDocPDF(true, 'Comprovante', 'green', content, styles);
     this.screen.presentToast('Comprovante gerado com sucesso.', '', 'success');
+  }
+
+  getBase64ImageFromURL(url) {
+    return new Promise((resolve, reject) => {
+      var img = new Image();
+      img.setAttribute('crossOrigin', 'anonymous');
+
+      img.onload = () => {
+        var canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+
+        var dataURL = canvas.toDataURL('image/png');
+
+        resolve(dataURL);
+      };
+
+      img.onerror = (error) => {
+        reject(error);
+      };
+
+      img.src = url;
+    });
   }
 }

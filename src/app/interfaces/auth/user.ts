@@ -13,4 +13,5 @@ export interface User {
   groupId?: string;
   ticketsInitial?: number;
   ticketsFinal?: number;
+  sellers?: Array<string>;
 }

@@ -18,5 +18,6 @@ export const global = {
     adminInactiveCampaigns: 'Admin-Inactive-Campaings',
     groups: 'Groups',
     solicitation: 'Solicitation',
+    raffle: 'raffle',
   },
 };

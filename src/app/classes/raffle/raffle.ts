@@ -1,6 +1,6 @@
+import { CampaingClass } from 'src/app/classes/campaing/campaing';
 import { UserClass } from 'src/app/classes/users/user';
-import { promise } from 'protractor';
-import { Campaing } from './../../interfaces/campaing/campaing';
+import { Raffle } from '../../interfaces/Raffle/Raffle';
 import { CacheService } from '../../services/cache/cache.service';
 import { environment } from 'src/environments/environment';
 import { AngularFirestoreCollection } from '@angular/fire/compat/firestore';
@@ -10,30 +10,35 @@ import { ScreenService } from 'src/app/services/screen/screen.service';
 import { TranslateService } from 'src/app/services/translate/translate.service';
 
 @Injectable()
-export class CampaingClass {
-  private campaingInfo;
-  private campaingPagination;
-  private campaingUser;
-
-  private adminActiveCampaigns;
-  private adminInactiveCampaigns;
-
-  private cachePath = environment.global.path.campaings;
+export class RaffleClass {
+  private RaffleInfo;
+  private cachePath = environment.global.path.raffle;
   private cacheAdminActivePath = environment.global.path.adminActiveCampaigns;
-  private cacheAdminInactivePath =
-    environment.global.path.adminInactiveCampaigns;
   private collection: AngularFirestoreCollection;
-  private ref = environment.global.path.campaings;
-  private interfaceRef: Campaing;
+  private ref = environment.global.path.raffle;
+  private interfaceRef: Raffle;
 
   constructor(
+    public user: UserClass,
     private crud: CrudService,
     private screen: ScreenService,
     private translate: TranslateService,
     private cache: CacheService,
-    private user: UserClass
+    private camp: CampaingClass
   ) {
     this.collection = this.crud.collectionConstructor(this.ref);
+  }
+
+  migrateToCollection() {
+    const campaign = this.camp.get().raffles;
+    for (const a of campaign) {
+      this.crud.add(this.collection, a).then((res) => {
+        console.log(res);
+        const obj = a;
+        obj.id = res.id;
+        this.crud.update(this.collection, obj, res.id);
+      });
+    }
   }
 
   getAllHttp() {
@@ -78,15 +83,7 @@ export class CampaingClass {
   }
 
   get() {
-    return this.campaingInfo;
-  }
-
-  getAdminCampaings(active = true) {
-    if (active) {
-      return this.adminActiveCampaigns;
-    } else {
-      return this.adminInactiveCampaigns;
-    }
+    return this.RaffleInfo;
   }
 
   getCollection() {
@@ -111,32 +108,15 @@ export class CampaingClass {
   }
 
   set(value) {
-    this.campaingInfo = value;
-  }
-
-  setAdminCampaigns(value, active = true) {
-    if (active) {
-      this.adminActiveCampaigns = value;
-    } else {
-      this.adminInactiveCampaigns = value;
-    }
+    this.RaffleInfo = value;
+    console.log(value);
   }
 
   reset() {
-    this.campaingInfo = null;
+    this.RaffleInfo = null;
   }
 
-  getMyCampaing(id, active = true) {
-    let willReturn = [];
-    if (this.get().groupId === id) {
-      if (this.get().active === active) {
-        willReturn.push(this.get());
-      }
-    }
-    return willReturn;
-  }
-
-  getCampaignById(id): Promise<any> {
+  getRaffleById(id): Promise<any> {
     return new Promise((resolve) => {
       if (this.get()) {
         if (this.get().id === id) {
@@ -154,67 +134,6 @@ export class CampaingClass {
     });
   }
 
-  getCampaingPagination() {
-    return this.campaingPagination;
-  }
-
-  getCampaignUser() {
-    return this.campaingUser;
-  }
-
-  getMyTickets(campaign) {
-    const result = [];
-    for (const a of campaign.raffles) {
-      if (
-        a.number >= this.user.get().ticketsInitial &&
-        a.number <= this.user.get().ticketsFinal
-      ) {
-        result.push(a);
-      }
-    }
-    this.campaingUser = result;
-    return result;
-  }
-
-  createPagination(campaign, limit = 100) {
-    let result = [];
-    let resultTemp = [];
-    let limitCount = 0;
-    let pageCount = 0;
-    for (const a of campaign.raffles) {
-      if (limitCount === limit) {
-        result.push({
-          page: pageCount,
-          data: resultTemp,
-        });
-        resultTemp = [];
-        limitCount = 0;
-        pageCount++;
-      } else if (a.number === campaign.raffles.length) {
-        result.push({
-          page: pageCount,
-          data: resultTemp,
-        });
-      }
-      resultTemp.push(a);
-      limitCount++;
-    }
-    this.campaingPagination = result;
-    return result;
-  }
-
-  setAdminClass(groupId, active = true): Promise<any> {
-    return new Promise((resolve) => {
-      const res = this.getMyCampaing(groupId, active);
-      this.setCache(
-        active ? this.cacheAdminActivePath : this.cacheAdminInactivePath,
-        res
-      );
-      this.setAdminCampaigns(res, active);
-      resolve(res[0]);
-    });
-  }
-
   setClass(shouldUpdate): Promise<any> {
     return new Promise((resolve, reject) => {
       this.getCache(this.cachePath).then((cache) => {
@@ -223,11 +142,6 @@ export class CampaingClass {
             .then((http) => {
               this.set(http[0]);
               this.setCache(this.cachePath, http[0]);
-              this.setAdminClass(' ZGn06nBznLMoMeV3Eh1u', true).then((res) => {
-                this.createPagination(res);
-                this.getMyTickets(res);
-              });
-              this.setAdminClass(' ZGn06nBznLMoMeV3Eh1u', false);
               resolve(http[0]);
             })
             .catch((err) => {
@@ -242,11 +156,11 @@ export class CampaingClass {
     });
   }
 
-  add(object: Campaing) {
+  add(object: Raffle) {
     this.crud.add(this.collection, object);
   }
 
-  async update(object: Campaing): Promise<any> {
+  async update(object: Raffle): Promise<any> {
     await this.screen.presentLoading();
     return new Promise((resolve, reject) => {
       this.crud

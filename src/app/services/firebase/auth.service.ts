@@ -1,5 +1,4 @@
 import { Solicitation } from 'src/app/classes/solicitation/solicitation';
-import { CampaingClass } from './../../classes/campaing/campaing';
 import { ScreenService } from './../screen/screen.service';
 import { NavigationService } from 'src/app/services/navigation/navigation.service';
 import { User } from 'src/app/interfaces/auth/user';
@@ -18,6 +17,7 @@ import {
 import { from } from 'rxjs';
 import { TranslateService } from '../translate/translate.service';
 import { UserClass } from 'src/app/classes/users/user';
+import { CampaingClass } from 'src/app/classes/campaing/campaing';
 
 @Injectable({
   providedIn: 'root',
