@@ -19,5 +19,6 @@ export const global = {
     groups: 'Groups',
     solicitation: 'Solicitation',
     raffle: 'raffle',
+    logs: 'Logs',
   },
 };

@@ -1,12 +1,10 @@
 import { ShareService } from './../share/share.service';
-import { GroupClass } from './../../classes/group/group';
-import { MasterService } from './../master/master.service';
-import { NavigationService } from 'src/app/services/navigation/navigation.service';
 import { ScreenService } from './../screen/screen.service';
 import { CampaingClass } from './../../classes/campaing/campaing';
 import { Raffle } from './../../interfaces/raffle/raffle';
 import { Campaing } from './../../interfaces/campaing/campaing';
 import { Injectable } from '@angular/core';
+import { Logs } from 'src/app/classes/logs/logs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,10 +13,10 @@ export class RaffleService {
   constructor(
     private campaignClass: CampaingClass,
     private screen: ScreenService,
-    private share: ShareService
+    private log: Logs
   ) {}
 
-  sell(raffle, campaing, data, fromSell) {
+  sell(raffle, campaing, data, fromSell = true, log = true) {
     const newRaffle: Raffle = {
       number: raffle.number,
       buyer: data.name,
@@ -38,12 +36,16 @@ export class RaffleService {
       campaing.sold++;
       campaing.free--;
     }
+    console.log(newRaffle);
     this.campaignClass.update(campaing).then(() => {
       this.screen.presentToast(
         'Número vendido com sucesso para ' + data.name,
         'Venda Confirmada!',
         'sucess'
       );
+      if (log) {
+        this.log.add(newRaffle);
+      }
       this.campaignClass.setClass(true).then(() => {
         this.campaignClass.getMyTickets(campaing);
         this.campaignClass.createPagination(campaing);
@@ -87,6 +89,8 @@ export class RaffleService {
     const newRaffle: Raffle = {
       number: raffle.number,
       buyer: '',
+      contact: '',
+      seller: '',
       purchasedWhen: 0,
       value: raffle.value,
       reserved: false,
@@ -109,6 +113,7 @@ export class RaffleService {
         'Liberação confirmada!',
         'sucess'
       );
+      this.log.add(newRaffle);
       this.campaignClass.setClass(true).then((res) => {
         this.campaignClass.set(res);
         this.campaignClass.getMyTickets(res);

@@ -198,27 +198,22 @@ export class RaffleDetailsPage {
     const content = [
       {
         image: await this.getBase64ImageFromURL(
-          '../../../assets/img/promo.jpeg'
+          '../../../assets/img/acao.jpeg'
         ),
-        width: 100,
+        width: 150,
+        height: 100,
         alignment: 'center',
       },
-      {
-        text: '\nAção entre Amigos',
-        fontSize: 16,
-        alignment: 'center',
-        bold: true,
-      },
-      {
-        text: 'Centro Espírita Beneficiente União do Vegetal\nNúcleo Jardim das Flores - 9ª região',
-        fontSize: 10,
-        alignment: 'center',
-        bold: false,
-      },
+      // {
+      //   text: 'Centro Espírita Beneficiente União do Vegetal\nNúcleo Jardim das Flores - 9ª região',
+      //   fontSize: 10,
+      //   alignment: 'center',
+      //   bold: false,
+      // },
       {
         text: [
           {
-            text: '\nComprovante de Compra\n Nº ' + this.who.number,
+            text: 'Comprovante de Compra\n Nº ' + this.who.number,
             fontSize: 14,
             bold: true,
             color: 'black',
@@ -251,6 +246,13 @@ export class RaffleDetailsPage {
         bold: false,
         alignment: 'center',
       },
+      // {
+      //   image: await this.getBase64ImageFromURL(
+      //     '../../../assets/img/promo.jpeg'
+      //   ),
+      //   width: 250,
+      //   alignment: 'center',
+      // },
     ];
     const styles = {
       pageSize: 'A6',

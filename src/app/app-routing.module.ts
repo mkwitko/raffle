@@ -127,7 +127,11 @@ const routes: Routes = [
   },
   {
     path: 'sellers-home',
-    loadChildren: () => import('./pages/menu/sellers/sellers-home/sellers-home.module').then( m => m.SellersHomePageModule)
+    loadChildren: () =>
+      import('./pages/menu/sellers/sellers-home/sellers-home.module').then(
+        (m) => m.SellersHomePageModule
+      ),
+    canActivate: [AuthGuard],
   },
 ];
 

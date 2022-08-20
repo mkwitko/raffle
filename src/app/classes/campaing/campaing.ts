@@ -9,10 +9,11 @@ import { Injectable } from '@angular/core';
 import { ScreenService } from 'src/app/services/screen/screen.service';
 import { TranslateService } from 'src/app/services/translate/translate.service';
 import { resourceLimits } from 'worker_threads';
+import { Raffle } from 'src/app/interfaces/raffle/raffle';
 
 @Injectable()
 export class CampaingClass {
-  private campaingInfo;
+  private campaingInfo: Campaing;
   private campaingPagination;
   private campaingUser;
 
@@ -35,6 +36,290 @@ export class CampaingClass {
     private cache: CacheService
   ) {
     this.collection = this.crud.collectionConstructor(this.ref);
+  }
+
+  recover() {
+    let result = [];
+    result.push(
+      this.create(
+        301,
+        'Fabio Andolphi',
+        '+55 22 99739-9279',
+        'Mauricio de Oliveira Kwitko',
+        this.convertTime('18', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        305,
+        'Edson de Toledo',
+        '+55 51 99221-0594',
+        'Mauricio de Oliveira Kwitko',
+        this.convertTime('19', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        351,
+        'Davi Ponsoni',
+        '+55 51 99896-6093',
+        'Mara Eliana de Oliveira',
+        this.convertTime('19', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        353,
+        'Vânia Melchionna',
+        '+55 51 98114-6662',
+        'Mara Eliana de Oliveira',
+        this.convertTime('19', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        354,
+        'Debora Hennicka',
+        '+55 51 99952-9868',
+        'Mara Eliana de Oliveira',
+        this.convertTime('19', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        355,
+        'Maria Eugenia',
+        '+55 51 98901-8181',
+        'Mara Eliana de Oliveira',
+        this.convertTime('19', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        357,
+        'Debora Hennicka',
+        '+55 51 99952-9868',
+        'Mara Eliana de Oliveira',
+        this.convertTime('19', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        359,
+        'Vânia Melchionna',
+        '+55 51 98114-6662',
+        'Mara Eliana de Oliveira',
+        this.convertTime('19', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        360,
+        'Max da Silva Hennicka',
+        '+55 51 99967-6723',
+        'Mara Eliana de Oliveira',
+        this.convertTime('19', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        385,
+        'Maria Eugenia',
+        '+55 51 98901-8181',
+        'Mara Eliana de Oliveira',
+        this.convertTime('19', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        607,
+        'Eliete Angelica',
+        '+55 51 98041-5536',
+        'Camila',
+        this.convertTime('19', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        1111,
+        'Alexa Lacerda',
+        '+55 51 99986-8030',
+        'Naad',
+        this.convertTime('18', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        1112,
+        'Alexa Lacerda',
+        '+55 51 99986-8030',
+        'Naad',
+        this.convertTime('18', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        1113,
+        'Alexa Lacerda',
+        '+55 51 99986-8030',
+        'Naad',
+        this.convertTime('18', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        1114,
+        'Fabiane F. Bittencourt',
+        '+55 51 99966-3152',
+        'Naad Santana',
+        this.convertTime('19', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        1115,
+        'Alexa Lacerda',
+        '+55 51 99986-8030',
+        'Naad',
+        this.convertTime('18', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        1116,
+        'Matheus Schiffner',
+        '+55 51 98951-4899',
+        'Naad',
+        this.convertTime('18', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        1117,
+        'Matheus Schiffner',
+        '+55 51 98951-4899',
+        'Naad',
+        this.convertTime('18', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        1118,
+        'Matheus Schiffner',
+        '+55 51 98951-4899',
+        'Naad',
+        this.convertTime('18', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        1119,
+        'Matheus Schiffner',
+        '+55 51 98951-4899',
+        'Naad',
+        this.convertTime('18', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        1120,
+        'Maria Teresa',
+        '+55 51 99382-2220',
+        'Naad Santana',
+        this.convertTime('19', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        1151,
+        'Gislaine Bizo',
+        '+55 51 99935-0163',
+        'Naad Santana',
+        this.convertTime('19', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        1152,
+        'Fabiano Pagane',
+        '+55 51 99973-1253',
+        'Naad Santana',
+        this.convertTime('19', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        1154,
+        'Ilza Brum Ribas',
+        '+55 51 99615-1471',
+        'Naad Santana',
+        this.convertTime('19', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        1155,
+        'Shirlize Fietz',
+        '+55 51 99143-3316',
+        'Naad Santana',
+        this.convertTime('19', '08', '2022')
+      )
+    );
+
+    result.push(
+      this.create(
+        1158,
+        'Maria Teresa Schiffner',
+        '+55 51 99382-220',
+        'Naad Santana',
+        this.convertTime('19', '08', '2022')
+      )
+    );
+    return result;
+  }
+
+  convertTime(day, month, year) {
+    return new Date(year, month, day).getTime();
+  }
+
+  create(number, name, contact, seller, when, value = '25') {
+    const newRaffle: Raffle = {
+      number: number,
+      buyer: name,
+      contact: contact,
+      seller: seller,
+      purchasedWhen: when,
+      value: value,
+      reserved: false,
+      sold: true,
+      reserver: '',
+      reservedTill: 0,
+    };
+    return newRaffle;
   }
 
   getAllHttp() {

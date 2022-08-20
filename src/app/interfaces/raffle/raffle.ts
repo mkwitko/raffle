@@ -10,4 +10,5 @@ export interface Raffle {
   sold?: boolean;
   reserver?: string;
   reservedTill?: number;
+  log?: number;
 }

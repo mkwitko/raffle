@@ -6,6 +6,8 @@ import { MasterService } from './services/master/master.service';
 import { MenuService } from './services/menu/menu.service';
 import { NavigationService } from './services/navigation/navigation.service';
 import { DatePipe } from '@angular/common';
+import { Platform } from '@ionic/angular';
+import { ServicesswupdaterService } from './servicesswupdater.service';
 
 @Component({
   selector: 'app-root',
@@ -21,13 +23,13 @@ export class AppComponent {
       disabled: 'false',
       role: 'all',
     },
-    {
-      nome: 'Sócios Vendedores',
-      icone: 'easel-sharp',
-      url: 'sellers-home',
-      disabled: 'false',
-      role: 'all',
-    },
+    // {
+    //   nome: 'Sócios Vendedores',
+    //   icone: 'easel-sharp',
+    //   url: 'sellers-home',
+    //   disabled: 'false',
+    //   role: 'all',
+    // },
     // {
     //   nome: 'Explorar',
     //   icone: 'home-sharp',
@@ -101,13 +103,24 @@ export class AppComponent {
     private navigation: NavigationService,
     private menu: MenuService,
     private auth: AuthService,
-    private master: MasterService
+    private master: MasterService,
+    private platform: Platform,
+    private sw: ServicesswupdaterService
   ) {
     this.auth.getAuth().onAuthStateChanged((user) => {
       if (user) {
         this.master.setUser(user.uid);
       }
     });
+  }
+
+  async ngOnInit() {
+    await this.initializeApp();
+  }
+
+  async initializeApp() {
+    await this.platform.ready();
+    this.sw.checkForUpdates();
   }
 
   goTo(url: string) {
