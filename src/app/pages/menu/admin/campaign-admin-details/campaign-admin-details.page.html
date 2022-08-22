@@ -11,7 +11,7 @@
             <ng-container *ngIf="campaignClass.get()">
                 <ng-container *ngIf="userClass.get().role === 'admin'">
                     <ion-accordion-group value="0">
-                        <ng-container *ngFor="let item of campaignClass.getCampaingPagination(); let i = index">
+                        <ng-container *ngFor="let item of monitorClass.getUserRaffles(); let i = index">
                             <ion-accordion value="{{i}}">
                                 <ion-item class="ion-margin" color="primary" slot="header">
                                     <ion-label>
@@ -33,8 +33,8 @@
                     </ion-accordion-group>
                 </ng-container>
                 <ng-container *ngIf="userClass.get().role === 'user'">
-                    <ng-container *ngIf="campaignClass.getCampaignUser()">
-                        <ion-accordion-group *ngIf="campaignClass.getCampaignUser().length > 0" value="0">
+                    <ng-container *ngIf="monitorClass.getUserRaffles().raffles">
+                        <ion-accordion-group *ngIf="monitorClass.getUserRaffles().raffles.length > 0" value="0">
                             <ng-container>
                                 <ion-accordion value="0">
                                     <ion-item class="ion-margin" color="primary" slot="header">
@@ -43,7 +43,7 @@
                                         </ion-label>
                                     </ion-item>
                                     <div class="flex ion-padding" slot="content">
-                                        <ng-container *ngFor="let raffles of campaignClass.getCampaignUser(); let i = index">
+                                        <ng-container *ngFor="let raffles of monitorClass.getUserRaffles().raffles; let i = index">
                                             <ion-button color="{{raffles.sold ? 
                                                 'danger' : 
                                                 raffles.reserved ? 
@@ -55,11 +55,11 @@
                                 </ion-accordion>
                             </ng-container>
                         </ion-accordion-group>
-                        <ng-container *ngIf="campaignClass.getCampaignUser().length === 0">
+                        <ng-container *ngIf="monitorClass.getUserRaffles().raffles.length === 0">
                             <h3 class="ion-margin">Você ainda não tem números liberados para venda. <br><br>Aguarde aprovação de um administrador.</h3>
                         </ng-container>
                     </ng-container>
-                    <ng-container *ngIf="!campaignClass.getCampaignUser()">
+                    <ng-container *ngIf="!monitorClass.getUserRaffles().raffles">
                         <app-skeleton-banner></app-skeleton-banner>
                     </ng-container>
 

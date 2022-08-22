@@ -1,3 +1,4 @@
+import { MonitorClass } from 'src/app/classes/monitors/monitorClass';
 import { UserClass } from 'src/app/classes/users/user';
 import { RaffleDetailsPage } from './../../../../modal/raffle-details/raffle-details.page';
 import { ScreenService } from './../../../../services/screen/screen.service';
@@ -19,6 +20,7 @@ export class CampaignAdminDetailsPage {
   constructor(
     public userClass: UserClass,
     public campaignClass: CampaingClass,
+    public monitorClass: MonitorClass,
     private raffle: RaffleService,
     private screen: ScreenService
   ) {}
@@ -28,7 +30,6 @@ export class CampaignAdminDetailsPage {
   }
 
   details(raffle) {
-    console.log(raffle);
     this.screen.presentModal(
       RaffleDetailsPage,
       'transparent-modal',

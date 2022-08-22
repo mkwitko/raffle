@@ -69,22 +69,11 @@ export class RaffleDetailsPage {
   }
 
   sell(data, fromSell) {
-    this.campaingClass.getCache().then((cache) => {
-      this.raffle.sell(this.who, cache, data, fromSell);
-    });
-  }
-
-  reserve(name, till) {
-    this.campaingClass.getCache().then((cache) => {
-      this.raffle.reserve(this.who, cache, name, till);
-    });
+    this.raffle.sell(this.who, data, fromSell);
   }
 
   liberate(sell) {
-    this.campaingClass.getCache().then((cache) => {
-      console.log(cache);
-      this.raffle.liberate(this.who, cache, sell);
-    });
+    this.raffle.liberate(this.who, sell);
   }
 
   async presentAlertLiberate(sell = true) {
@@ -155,44 +144,6 @@ export class RaffleDetailsPage {
   }
 
   edit() {}
-
-  async presentAlertReserve() {
-    const alert = await this.alertController.create({
-      header: 'Por favor, preencha as informações',
-      cssClass: 'my-alert',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          handler: () => {},
-        },
-        {
-          text: 'Confirmar',
-          role: 'confirm',
-          handler: (alertData) => {
-            if (alertData.name && alertData.date) {
-              this.reserve(alertData.name, alertData.date);
-            } else {
-              this.screen.presentToast('Preencha o campo de nome e data');
-            }
-          },
-        },
-      ],
-      inputs: [
-        {
-          name: 'name',
-          placeholder: 'Nome',
-        },
-        {
-          name: 'date',
-          type: 'date',
-          placeholder: 'Reservado até',
-        },
-      ],
-    });
-
-    await alert.present();
-  }
 
   async downloadTerm() {
     const content = [

@@ -41,6 +41,7 @@ export class AuthService {
       this.screen.presentToast('Preencha todos os campos.');
     } else {
       await this.screen.presentLoading();
+      console.log(user);
       return from(
         signInWithEmailAndPassword(
           this.auth,

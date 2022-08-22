@@ -1,6 +1,6 @@
 <app-header></app-header>
 <ion-content>
-    <p class="ion-margin ion-text-center">Versão do Sistema: 1.2.0</p>
+    <p class="ion-margin ion-text-center">Versão do Sistema: {{version}}</p>
     <h3>Ações entre amigos ativas</h3>
     <ion-list *ngIf="campaingClass.getAdminCampaings()">
         <ng-container *ngFor="let item of campaingClass.getAdminCampaings()">
@@ -35,4 +35,10 @@
             </ion-card>
         </ng-container>
     </ion-list>
+
+    <!-- <ion-fab (click)="update()" vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
+            <ion-icon name="refresh"></ion-icon>
+        </ion-fab-button>
+    </ion-fab> -->
 </ion-content>

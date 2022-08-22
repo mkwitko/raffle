@@ -1,3 +1,4 @@
+import { MasterService } from './../master/master.service';
 import { ShareService } from './../share/share.service';
 import { ScreenService } from './../screen/screen.service';
 import { CampaingClass } from './../../classes/campaing/campaing';
@@ -5,6 +6,8 @@ import { Raffle } from './../../interfaces/raffle/raffle';
 import { Campaing } from './../../interfaces/campaing/campaing';
 import { Injectable } from '@angular/core';
 import { Logs } from 'src/app/classes/logs/logs';
+import { RaffleClass } from 'src/app/classes/raffles/raffle';
+import { MonitorClass } from 'src/app/classes/monitors/monitorClass';
 
 @Injectable({
   providedIn: 'root',
@@ -13,10 +16,41 @@ export class RaffleService {
   constructor(
     private campaignClass: CampaingClass,
     private screen: ScreenService,
-    private log: Logs
+    private raffleClass: RaffleClass,
+    private log: Logs,
+    private monitorClass: MonitorClass,
+    private master: MasterService
   ) {}
 
-  sell(raffle, campaing, data, fromSell = true, log = true) {
+  getRaffleId(number) {
+    return this.raffleClass.find(number).id;
+  }
+
+  set(raffle, newRaffle): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.monitorClass
+        .getAllHttp()
+        .then((res: any) => {
+          const obj = res;
+          this.monitorClass.getMyTickets(obj);
+          const monitorHttp = this.monitorClass.getUserRaffles();
+          const rafflesHttp = monitorHttp.raffles;
+          rafflesHttp[this.monitorClass.find(raffle.number).index] = newRaffle;
+          monitorHttp.raffles = rafflesHttp;
+          resolve(monitorHttp);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+    // const monitor = this.monitorClass.getUserRaffles();
+    // const raffles = monitor.raffles;
+    // raffles[this.monitorClass.find(raffle.number).index] = newRaffle;
+    // monitor.raffles = raffles;
+    // return monitor;
+  }
+
+  sell(raffle, data, fromSell = true, log = false) {
     const newRaffle: Raffle = {
       number: raffle.number,
       buyer: data.name,
@@ -29,63 +63,27 @@ export class RaffleService {
       reserver: '',
       reservedTill: 0,
     };
-    let raffles = campaing.raffles;
-    raffles[this.findRaffleIndex(raffle, campaing)] = newRaffle;
-    campaing.raffles = raffles;
-    if (fromSell) {
-      campaing.sold++;
-      campaing.free--;
+    this.set(raffle, newRaffle).then((obj) => {
+      this.monitorClass.update(obj).then(() => {
+        this.screen.presentToast(
+          'Número vendido com sucesso para ' + data.name,
+          'Venda Confirmada!',
+          'sucess'
+        );
+        this.updateCampaign(newRaffle, log);
+      });
+    });
+  }
+
+  updateCampaign(newRaffle, log) {
+    this.master.update();
+    this.screen.dismissModal();
+    if (log) {
+      this.log.add(newRaffle);
     }
-    console.log(newRaffle);
-    this.campaignClass.update(campaing).then(() => {
-      this.screen.presentToast(
-        'Número vendido com sucesso para ' + data.name,
-        'Venda Confirmada!',
-        'sucess'
-      );
-      if (log) {
-        this.log.add(newRaffle);
-      }
-      this.campaignClass.setClass(true).then(() => {
-        this.campaignClass.getMyTickets(campaing);
-        this.campaignClass.createPagination(campaing);
-        this.screen.dismissModal();
-      });
-    });
   }
 
-  reserve(raffle, campaing, name, till) {
-    const newRaffle: Raffle = {
-      number: raffle.number,
-      buyer: '',
-      purchasedWhen: 0,
-      value: raffle.value,
-      reserved: true,
-      sold: false,
-      reserver: name,
-      reservedTill: till,
-    };
-    let raffles = campaing.raffles;
-    raffles[this.findRaffleIndex(raffle, campaing)] = newRaffle;
-    campaing.raffles = raffles;
-    campaing.reserved++;
-    campaing.free--;
-    console.log(campaing);
-    this.campaignClass.update(campaing).then(() => {
-      this.screen.presentToast(
-        'Número reservado com sucesso para ' + name + ' até o dia ' + till,
-        'Reserva Confirmada!',
-        'sucess'
-      );
-      this.campaignClass.setClass(true).then(() => {
-        this.campaignClass.getMyTickets(campaing);
-        this.campaignClass.createPagination(campaing);
-        this.screen.dismissModal();
-      });
-    });
-  }
-
-  liberate(raffle, campaing, sell = true) {
+  liberate(raffle, sell = true, log = false) {
     const newRaffle: Raffle = {
       number: raffle.number,
       buyer: '',
@@ -98,40 +96,16 @@ export class RaffleService {
       reserver: '',
       reservedTill: 0,
     };
-    let raffles = campaing.raffles;
-    raffles[this.findRaffleIndex(raffle, campaing)] = newRaffle;
-    campaing.raffles = raffles;
-    campaing.free++;
-    if (sell) {
-      campaing.sold--;
-    } else {
-      campaing.reserved--;
-    }
-    this.campaignClass.update(campaing).then(() => {
-      this.screen.presentToast(
-        'Número liberado com sucesso!',
-        'Liberação confirmada!',
-        'sucess'
-      );
-      this.log.add(newRaffle);
-      this.campaignClass.setClass(true).then((res) => {
-        this.campaignClass.set(res);
-        this.campaignClass.getMyTickets(res);
-        this.campaignClass.createPagination(res);
-        this.screen.dismissModal();
+    this.set(raffle, newRaffle).then((obj) => {
+      this.monitorClass.update(obj).then(() => {
+        this.screen.presentToast(
+          'Número liberado com sucesso!',
+          'Liberação confirmada!',
+          'sucess'
+        );
+        this.updateCampaign(newRaffle, log);
       });
     });
-  }
-
-  findRaffleIndex(raffle, campaing) {
-    console.log('find index - ', campaing);
-    let count = 0;
-    for (const a of campaing.raffles) {
-      if (a.number === raffle.number) {
-        return count;
-      }
-      count++;
-    }
   }
 
   createRaffle(campaign: Campaing) {
