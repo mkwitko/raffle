@@ -11,12 +11,14 @@ import { ScreenService } from 'src/app/services/screen/screen.service';
 import { TranslateService } from 'src/app/services/translate/translate.service';
 import { CampaingClass } from '../campaing/campaing';
 import { timeStamp } from 'console';
+import { Logs } from '../logs/logs';
 
 @Injectable()
 export class MonitorClass {
   private MonitorInfo = new Array<Monitor>();
   private userRaffles;
   private finder = [];
+  private finderById = [];
 
   private cachePath = environment.global.path.monitor;
   private collection: AngularFirestoreCollection;
@@ -29,7 +31,8 @@ export class MonitorClass {
     private screen: ScreenService,
     private translate: TranslateService,
     private cache: CacheService,
-    private campaign: CampaingClass
+    private campaign: CampaingClass,
+    private logs: Logs
   ) {
     this.collection = this.crud.collectionConstructor(this.ref);
   }
@@ -39,6 +42,7 @@ export class MonitorClass {
   }
 
   getMyTickets(obj) {
+    console.log('a');
     if (this.user.get().role !== 'admin') {
       for (const a of obj) {
         if (a.number - 1 === this.getUserIndex()) {
@@ -51,6 +55,7 @@ export class MonitorClass {
       for (const a of obj) {
         this.userRaffles.push(a);
       }
+      console.log(this.userRaffles);
     }
   }
 
@@ -71,7 +76,6 @@ export class MonitorClass {
         count++;
       }
     }
-    console.log(this.finder);
   }
 
   find(number) {
@@ -80,6 +84,16 @@ export class MonitorClass {
 
   getUserRaffles() {
     return this.userRaffles;
+  }
+
+  getFreeUserRaffles() {
+    let free = [];
+    for (const a of this.userRaffles.raffles) {
+      if (!a.sold) {
+        free.push(a);
+      }
+    }
+    return free;
   }
 
   getAllHttp() {
@@ -170,6 +184,16 @@ export class MonitorClass {
     return sold;
   }
 
+  fillMonitorsById() {
+    for (const a of this.get()) {
+      this.finderById[a.id] = a;
+    }
+  }
+
+  findById(id: string) {
+    return this.finderById[id];
+  }
+
   setClass(shouldUpdate): Promise<any> {
     return new Promise((resolve, reject) => {
       this.getCache(this.cachePath).then((cache) => {
@@ -178,6 +202,7 @@ export class MonitorClass {
             .then((http) => {
               this.set(http);
               this.setCache(this.cachePath, http);
+              this.fillMonitorsById();
               resolve(http);
             })
             .catch((err) => {

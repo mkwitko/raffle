@@ -114,7 +114,6 @@ export class Solicitation {
     for (const a of value) {
       let push = a;
       this.getUserFromSolictation(a.userId).then((res) => {
-        console.log(res);
         push.name = res.userName;
         push.userId = res.userId;
       });

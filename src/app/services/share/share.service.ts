@@ -14,7 +14,6 @@ export class ShareService {
   ) {}
 
   share(file) {
-    console.log('share');
     if (this.platform.is('cordova')) {
       this.screen.presentToast('mobile');
       this.socialSharing.share('', '', file);

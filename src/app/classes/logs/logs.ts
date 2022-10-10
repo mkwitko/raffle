@@ -74,7 +74,6 @@ export class Logs {
   }
 
   add(object: Raffle) {
-    console.log(object);
     this.crud.add(this.collection, this.createlogs(object));
   }
 

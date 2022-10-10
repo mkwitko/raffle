@@ -133,6 +133,10 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'raffle-multiple',
+    loadChildren: () => import('./modal/raffle-multiple/raffle-multiple.module').then( m => m.RaffleMultiplePageModule)
+  },
 ];
 
 @NgModule({

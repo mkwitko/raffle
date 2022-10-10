@@ -109,12 +109,9 @@ export class GroupClass {
 
   getMyGroup(id) {
     for (const a in this.get()) {
-      console.log(this.get()[a].id, id);
       if (this.get()[a].id === id) {
-        console.log(this.get()[a]);
         return this.get()[a];
       } else {
-        console.log('else');
       }
     }
   }

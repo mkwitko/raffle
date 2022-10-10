@@ -155,12 +155,6 @@ export class RaffleDetailsPage {
         height: 100,
         alignment: 'center',
       },
-      // {
-      //   text: 'Centro Espírita Beneficiente União do Vegetal\nNúcleo Jardim das Flores - 9ª região',
-      //   fontSize: 10,
-      //   alignment: 'center',
-      //   bold: false,
-      // },
       {
         text: [
           {

@@ -1,18 +1,21 @@
 <app-header></app-header>
 
 <ion-content>
-    <ion-grid fixed>
-        <ion-row *ngFor="let each of [0,1,2,3,4,5,6,7,8,9]; let i = index">
-            <ion-col size="10">
-                <ion-item lines="full">
-                    <ion-input type="text" placeholder="Nome do Sócio Vendedor número {{i + 1}}"></ion-input>
-                </ion-item>
-            </ion-col>
-            <ion-col size="2">
-                <ion-button (click)="send(i)" expand="block">
-                    Enviar
-                </ion-button>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+    <ion-item>
+        <ion-label position="floating">Números a adicionar</ion-label>
+        <ion-input [(ngModel)]="add" type="number"></ion-input>
+    </ion-item>
+    <ng-container *ngIf="monitors">
+        <ion-item *ngIf="monitors.length > 0">
+            <ion-select (ionChange)="handleChange($event)" value="{{monitors[0].id}}" placeholder="Escolha o Monitor">
+                <ng-container *ngFor="let item of monitors; let number = index">
+                    <ion-select-option value="{{item.id}}">Monitor {{number + 1}}</ion-select-option>
+                </ng-container>
+            </ion-select>
+        </ion-item>
+    </ng-container>
+    <ion-button (click)="addNumbers()" expand="block" fill="clear" shape="round">
+        Adicoinar
+    </ion-button>
+
 </ion-content>

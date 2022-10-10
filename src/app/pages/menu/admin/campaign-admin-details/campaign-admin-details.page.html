@@ -15,11 +15,11 @@
                             <ion-accordion value="{{i}}">
                                 <ion-item class="ion-margin" color="primary" slot="header">
                                     <ion-label>
-                                        {{item.data[0].number}} - {{item.data[item.data.length - 1].number}}
+                                        Monitor {{item.number}}
                                     </ion-label>
                                 </ion-item>
                                 <div class="flex ion-padding" slot="content">
-                                    <ng-container *ngFor="let raffles of item.data; let i = index">
+                                    <ng-container *ngFor="let raffles of item.raffles; let i = index">
                                         <ion-button color="{{raffles.sold ? 
                                             'danger' : 
                                             raffles.reserved ? 
@@ -67,4 +67,9 @@
             </ng-container>
         </ng-container>
     </ng-container>
+    <ion-fab (click)="goTo()" vertical="bottom" horizontal="start" slot="fixed">
+        <ion-fab-button color="secondary">
+            <ion-icon color="light" name="document-sharp"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 </ion-content>

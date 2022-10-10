@@ -41,7 +41,6 @@ export class AuthService {
       this.screen.presentToast('Preencha todos os campos.');
     } else {
       await this.screen.presentLoading();
-      console.log(user);
       return from(
         signInWithEmailAndPassword(
           this.auth,
@@ -137,12 +136,10 @@ export class AuthService {
             .then((res) => {
               this.userClass.add(user, res.user.uid);
               this.campaignClass.getAllHttp().then((campaign) => {
-                console.log('Register - ', campaign);
                 const solicitation = this.solicitation.createSolicitation(
                   campaign[0],
                   res.user.uid
                 );
-                console.log('Solicitation - ', solicitation);
                 this.solicitation.add(solicitation);
               });
             })

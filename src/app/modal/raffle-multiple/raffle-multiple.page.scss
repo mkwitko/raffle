@@ -1,0 +1,72 @@
+.profile {
+    height: 30%;
+    ion-avatar {
+        height: 25vh;
+        width: 25vh;
+        display: block;
+        margin: auto;
+        margin-top: 4vh;
+        // border: white 2.5px solid;
+        // border-radius: 50%;
+    }
+}
+
+ion-row {
+    margin-bottom: 2vh;
+}
+
+.nome {
+    font-size: 3vh;
+    font-family: 'Din-Bold';
+}
+
+.margin {
+    margin-left: 2vh;
+    margin-right: 2vh;
+    margin-bottom: 3.5;
+    margin-top: 1.3vh;
+}
+
+.titulo {
+    font-family: 'Din-Bold';
+    font-size: 2vh;
+}
+
+.valor {
+    font-family: 'Din-Bold';
+    font-size: 2.1vh;
+    text-align: center;
+}
+
+p,
+ion-label {
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+ion-input {
+    --color: white;
+}
+
+ion-toolbar {
+    --margin: 0;
+    --padding: 0;
+}
+
+ion-button {
+    font-size: 2vh;
+    font-family: 'Din-Bold';
+}
+
+h3 {
+    text-align: center;
+    color: white;
+    font-family: 'Din-Bold';
+    font-size: 2.5vh;
+}
+
+ion-alert {
+    --heigth: 60vh;
+    --width: 60vh;
+}

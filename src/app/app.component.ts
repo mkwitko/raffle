@@ -23,13 +23,13 @@ export class AppComponent {
       disabled: 'false',
       role: 'all',
     },
-    // {
-    //   nome: 'Sócios Vendedores',
-    //   icone: 'easel-sharp',
-    //   url: 'sellers-home',
-    //   disabled: 'false',
-    //   role: 'all',
-    // },
+    {
+      nome: 'Criar Números',
+      icone: 'easel-sharp',
+      url: 'sellers-home',
+      disabled: 'false',
+      role: 'admin',
+    },
     // {
     //   nome: 'Explorar',
     //   icone: 'home-sharp',

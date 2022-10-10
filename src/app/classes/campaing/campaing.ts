@@ -218,7 +218,7 @@ export class CampaingClass {
               if (http[0].sold !== sold.length) {
                 const camp = http[0];
                 camp.sold = sold.length;
-                camp.free = 1200 - sold.length;
+                camp.free = camp.ticketsShare - sold.length;
                 this.update(camp).then(() => {
                   this.set(camp);
                   this.setCache(this.cachePath, camp);

@@ -1,5 +1,5 @@
 export const global = {
-  version: '1.2.3',
+  version: '1.2.7',
   erroGenerico:
     'Não foi possível realizar esta operação. Entre em contato com o Provedor do Serviço.',
   firebase: {

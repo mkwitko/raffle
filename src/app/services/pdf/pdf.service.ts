@@ -25,7 +25,7 @@ export class PdfService {
       content,
       styles
     );
-    this.downloadPdf(definitions, 'Comprovante RIFA JDF');
+    this.downloadPdf(definitions, 'Comprovante Ação entre Amigos');
   }
 
   createDefinitions(

@@ -1,3 +1,4 @@
+import { RaffleMultiplePage } from './../../../../modal/raffle-multiple/raffle-multiple.page';
 import { MonitorClass } from 'src/app/classes/monitors/monitorClass';
 import { UserClass } from 'src/app/classes/users/user';
 import { RaffleDetailsPage } from './../../../../modal/raffle-details/raffle-details.page';
@@ -34,6 +35,14 @@ export class CampaignAdminDetailsPage {
       RaffleDetailsPage,
       'transparent-modal',
       raffle,
+      this.campaignClass.get()
+    );
+  }
+
+  goTo() {
+    this.screen.presentModal(
+      RaffleMultiplePage,
+      'transparent-modal',
       this.campaignClass.get()
     );
   }
